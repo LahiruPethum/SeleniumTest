@@ -9,7 +9,7 @@ public class Login {
 
     //use invalid email and valid password
     @Test
-    public void testcase1(){
+    public void testcase1() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         ChromeDriver driver = new ChromeDriver();
 
@@ -23,6 +23,7 @@ public class Login {
         passwordInput.sendKeys("123456789");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
         Assert.assertEquals("Please include an '@' in the email address. 'pethum' is missing an '@'.",msg1);
+        Thread.sleep(5000);
         passwordInput.clear();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("@");
@@ -31,6 +32,7 @@ public class Login {
         passwordInput.sendKeys("123456789");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
         Assert.assertEquals("Please enter a part following '@'. 'pethum@' is incomplete.",msg2);
+        Thread.sleep(5000);
         passwordInput2.clear();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("gmail.");
@@ -39,11 +41,13 @@ public class Login {
         passwordInput.sendKeys("123456789");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
         Assert.assertEquals("'.' is used at a wrong position in 'gmail.'.",msg3);
+        Thread.sleep(5000);
         passwordInput2.clear();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("com");
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
+        Thread.sleep(5000);
         Assert.assertEquals("Please register before login",driver.findElement(By.xpath("/html/body/div[3]/div[4]/div/div[2]/div/div/div")).getText());
 
         driver.close();
@@ -51,7 +55,7 @@ public class Login {
 
     //use valid email and invalid password
     @Test
-    public void testcase2(){
+    public void testcase2() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         ChromeDriver driver = new ChromeDriver();
 
@@ -63,13 +67,14 @@ public class Login {
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys("5666fgfgh");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
+        Thread.sleep(5000);
         Assert.assertEquals("Invalid email or password",driver.findElement(By.xpath("/html/body/div[3]/div[4]/div/div[2]/div/div/div")).getText());
         driver.close();
     }
 
     //use invalid email and invalid password
     @Test
-    public void testcase3(){
+    public void testcase3() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         ChromeDriver driver = new ChromeDriver();
 
@@ -81,13 +86,14 @@ public class Login {
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys("5666fgfgh");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
+        Thread.sleep(5000);
         Assert.assertEquals("Please register before login",driver.findElement(By.xpath("/html/body/div[3]/div[4]/div/div[2]/div/div/div")).getText());
         driver.close();
     }
 
     //use valid email and valid password
     @Test
-    public void testcase4(){
+    public void testcase4() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         ChromeDriver driver = new ChromeDriver();
 
@@ -99,6 +105,7 @@ public class Login {
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys("123456789");
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
+        Thread.sleep(5000);
         String expectedUrl = "https://www.singersl.com/";
         String actualUrl = driver.getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl);

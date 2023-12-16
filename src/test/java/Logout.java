@@ -43,24 +43,19 @@ public class Logout {
             driver.get("https://www.singersl.com/");
             driver.manage().window().maximize();
 
-            // Click on the login link
             WebElement loginLink = driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a"));
             loginLink.click();
 
-            // Enter login credentials
             driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum013@gmail.com");
             driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
             driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
 
-
            driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
+            Thread.sleep(5000);
             WebElement logoutLink = driver.findElement(By.xpath("//*[@id=\"account-profile\"]/div[1]/div[2]/ul/li[7]/a"));
 
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", logoutLink);
-
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", logoutLink);
-
 
             Thread.sleep(5000);
 

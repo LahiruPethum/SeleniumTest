@@ -26,25 +26,16 @@ public class ShoppingCart {
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
             Thread.sleep(5000);
 
-
             driver.findElement(By.xpath("//*[@id='popularity']/div/div[1]/div[3]/a/img")).click();
             Thread.sleep(5000);
 
-
             WebElement addToCartButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='add-to-cart-id']")));
-
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCartButton);
-
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addToCartButton);
-
             Thread.sleep(5000);
-
 
             driver.findElement(By.xpath("/html/body/div[6]/div[9]/div/div[2]/div/div/a")).click();
             Thread.sleep(5000);
-
 
             String expectedUrl = "https://www.singersl.com/cart";
             String actualUrl = driver.getCurrentUrl();
@@ -54,7 +45,6 @@ public class ShoppingCart {
                 System.out.println("Test Failed! Expected: " + expectedUrl + ", Actual: " + actualUrl);
             }
         } finally {
-
             driver.quit();
         }
     }
@@ -70,26 +60,17 @@ public class ShoppingCart {
             driver.get("https://www.singersl.com/");
             driver.manage().window().maximize();
 
-
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("oven");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
             Thread.sleep(5000);
 
-
             driver.findElement(By.xpath("//*[@id='popularity']/div/div[1]/div[3]/a/img")).click();
             Thread.sleep(5000);
 
-
             WebElement addToCartButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='add-to-cart-id']")));
-
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCartButton);
-
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addToCartButton);
-
             Thread.sleep(5000);
-
 
             driver.findElement(By.xpath("/html/body/div[6]/div[9]/div/div[3]")).click();
             Thread.sleep(5000);
@@ -103,7 +84,6 @@ public class ShoppingCart {
                 System.out.println("Test Failed! Expected: " + expectedUrl + ", Actual: " + actualUrl);
             }
         } finally {
-
             driver.quit();
         }
     }

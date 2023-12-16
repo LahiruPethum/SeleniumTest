@@ -82,7 +82,7 @@ public static void testcase3() throws InterruptedException {
     }
 }
 
-    //    Validate searching with an existing Product Name
+//Validate Search by category of product
     @Test
     public static void testcase4() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
@@ -104,6 +104,8 @@ public static void testcase3() throws InterruptedException {
             driver.quit();
         }
     }
+
+    //Validate Search sub-category of the product
 
     @Test
     public static void testcase5() throws InterruptedException {

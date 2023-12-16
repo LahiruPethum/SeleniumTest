@@ -31,6 +31,7 @@ public class WishList {
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div[2]")).click();
 
         driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[3]/a/img")).click();
+        Thread.sleep(3000);
         WebElement checkbox = driver.findElement(By.xpath("//*[@id=\"block-mainpagecontent\"]/article/div/div[1]/div[1]/a"));
         WebElement checkbox1 = driver.findElement(By.xpath("//*[@id=\"block-mainpagecontent\"]/article/div/div[1]/div[1]/a/i"));
 
@@ -39,13 +40,13 @@ public class WishList {
         if (!classAttributeValue.contains("is-active")) {
             checkbox1.click();
         }
-
+        Thread.sleep(3000);
         driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"account-profile\"]/div[1]/div[2]/ul/li[3]/a")).click();
 
         List<WebElement> wishlistItems = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("wishlist-item")));
-
+        Thread.sleep(3000);
         String expectedText = "BLACK+DECKER 19 LITRE DOUBLE GLASS MULTIFUNCTION TOASTER OVEN WITH ROTISSERIE (TRO19RDG-B5)";
         boolean matchFound = false;
 
@@ -89,7 +90,7 @@ public class WishList {
         driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("BLACK+DECKER 19 Litre Double Glass Multifunction Toaster Oven With Rotisserie (TRO19RDG-B5)");
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div[2]")).click();
 
-
+        Thread.sleep(3000);
         WebElement checkbox = driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[2]/a"));
         WebElement checkbox1 = driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[2]/a/i"));
 
@@ -98,13 +99,13 @@ public class WishList {
         if (!classAttributeValue.contains("is-active")) {
             checkbox1.click();
         }
-
+        Thread.sleep(3000);
         driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"account-profile\"]/div[1]/div[2]/ul/li[3]/a")).click();
 
         List<WebElement> wishlistItems = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("wishlist-item")));
-
+        Thread.sleep(3000);
         String expectedText = "BLACK+DECKER 19 LITRE DOUBLE GLASS MULTIFUNCTION TOASTER OVEN WITH ROTISSERIE (TRO19RDG-B5)";
         boolean matchFound = false;
 

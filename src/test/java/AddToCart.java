@@ -29,7 +29,7 @@ public class AddToCart {
         driver.manage().window().maximize();
     }
     //Validate adding the product to Cart from 'Products' Page
-    @Test
+    @Test(priority = 1)
     public static void testcase1() throws InterruptedException {
 
 
@@ -65,7 +65,7 @@ public class AddToCart {
     }
 
     //Validate adding the product to Cart from 'Wish List' Page
-    @Test
+    @Test(priority = 2)
     public static void testcase2() throws InterruptedException {
 
         try {
@@ -111,7 +111,7 @@ public class AddToCart {
     }
 
     //Validate adding the product to Cart from Search Results Page
-    @Test
+    @Test(priority = 3)
     public static void testcase3() throws InterruptedException {
 
         try {

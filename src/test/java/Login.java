@@ -21,6 +21,7 @@ public class Login {
         driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
     }
 
+    //use invalid email and valid password
     @Test(priority = 1)
     public void testcase1() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum");
@@ -59,6 +60,7 @@ public class Login {
         driver.close();
     }
 
+    //use valid email and invalid password
     @Test(priority = 2)
     public void testcase2() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum013@gmail.com");

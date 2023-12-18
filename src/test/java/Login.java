@@ -1,22 +1,28 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Login {
+    WebDriver driver;
 
-    //use invalid email and valid password
-    @Test
-    public void testcase1() throws InterruptedException {
+    @BeforeMethod
+    public void init() {
         WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
+        driver = new ChromeDriver();
         driver.get("https://www.singersl.com/");
         driver.manage().window().maximize();
         driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
+    }
 
+    @Test(priority = 1)
+    public void testcase1() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum");
         String msg1 = driver.findElement(By.xpath("//*[@id=\"email\"]")).getAttribute("validationMessage");
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
@@ -53,16 +59,8 @@ public class Login {
         driver.close();
     }
 
-    //use valid email and invalid password
-    @Test
+    @Test(priority = 2)
     public void testcase2() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
-        driver.get("https://www.singersl.com/");
-        driver.manage().window().maximize();
-        driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
-
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum013@gmail.com");
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys("5666fgfgh");
@@ -72,15 +70,9 @@ public class Login {
         driver.close();
     }
 
-    //use invalid email and invalid password
-    @Test
+        //use invalid email and invalid password
+    @Test(priority = 3)
     public void testcase3() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
-        driver.get("https://www.singersl.com/");
-        driver.manage().window().maximize();
-        driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum@gmail.com");
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
@@ -91,15 +83,9 @@ public class Login {
         driver.close();
     }
 
-    //use valid email and valid password
-    @Test
+//    use valid email and valid password
+    @Test(priority = 4)
     public void testcase4() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
-        driver.get("https://www.singersl.com/");
-        driver.manage().window().maximize();
-        driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum013@gmail.com");
         WebElement passwordInput=driver.findElement(By.xpath("//*[@id=\"password\"]"));
@@ -113,4 +99,10 @@ public class Login {
     }
 
 
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

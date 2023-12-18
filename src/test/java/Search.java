@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -6,22 +7,29 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class Search {
 
+    static WebDriver driver;
+
+    @BeforeMethod
+    public void init() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://www.singersl.com/");
+        driver.manage().window().maximize();
+    }
+
     //    Validate searching with a non existing Product Name
     @Test
     public static void testcase1() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
-
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("BLACK+DECKER 19 Litre Double Glass Multifunction Toaster Oven With Rotisserie (TRO19RDG-B5)");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
             Thread.sleep(5000);
@@ -38,12 +46,8 @@ public class Search {
     //    Validate searching with an existing Product Name
     @Test
     public static void testcase2() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
 
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("fgfg");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
@@ -61,12 +65,8 @@ public class Search {
 //    Validate searching without providing any Product Name
 @Test
 public static void testcase3() throws InterruptedException {
-    WebDriver driver = new ChromeDriver();
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     try {
-        driver.get("https://www.singersl.com/");
-        driver.manage().window().maximize();
 
         WebElement searchInput = driver.findElement(By.xpath("//*[@id='edit-search']"));
         searchInput.sendKeys("");
@@ -85,12 +85,8 @@ public static void testcase3() throws InterruptedException {
 //Validate Search by category of product
     @Test
     public static void testcase4() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
 
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("Home & Kitchen Appliances");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
@@ -109,12 +105,8 @@ public static void testcase3() throws InterruptedException {
 
     @Test
     public static void testcase5() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
 
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("Laptops / Notebooks");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
@@ -128,5 +120,10 @@ public static void testcase3() throws InterruptedException {
             driver.quit();
         }
     }
-
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

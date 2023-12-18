@@ -7,21 +7,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import java.time.Instant;
 
 
 public class ShoppingCart {
-    @Test
+    static WebDriver driver;
+    static WebDriverWait wait;
+
+    @BeforeMethod
+    public void init() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.get("https://www.singersl.com/");
+        driver.manage().window().maximize();
+    }
+
+//    Validate navigating to 'Shopping Cart' page from the Success message
+    @Test(priority = 1)
     public static void testcase1() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
-
-
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("oven");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
             Thread.sleep(5000);
@@ -50,16 +60,11 @@ public class ShoppingCart {
     }
 
 
-
-    @Test
+//    Validate navigating to 'Shopping Cart' page from the 'Shopping Cart' header-middle clearfix section
+    @Test(priority = 2)
     public static void testcase2() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
-
             driver.findElement(By.xpath("//*[@id='edit-search']")).sendKeys("oven");
             driver.findElement(By.xpath("//*[@id='search-form']/div[2]")).click();
             Thread.sleep(5000);
@@ -88,16 +93,11 @@ public class ShoppingCart {
         }
     }
 
-
-    @Test
+//    Validate navigating to 'Shopping Cart' page from the 'Shopping Cart' header-middle clearfix section
+    @Test(priority = 3)
     public static void testcase3() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
-
             driver.findElement(By.xpath("//*[@id=\"block-singer-shopping-cart\"]")).click();
 
             String expectedUrl = "https://www.singersl.com/cart";
@@ -109,6 +109,12 @@ public class ShoppingCart {
             }
         } finally {
 
+            driver.quit();
+        }
+    }
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
         }
     }

@@ -38,7 +38,7 @@ public class WishList {
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div[2]")).click();
     }
     //Validate adding a product to 'Wish List' page from the Product that is displayed in the 'Related Products' section of 'Product Display' page
-    @Test
+    @Test(priority = 1)
     public void testcase1() throws InterruptedException {
 
         driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[3]/a/img")).click();
@@ -50,7 +50,7 @@ public class WishList {
     }
 
 //Validate adding a product to 'Wish List' page from the Search Results page
-    @Test
+    @Test(priority = 2)
     public void testcase2() throws InterruptedException {
 
         checkbox = driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[2]/a"));

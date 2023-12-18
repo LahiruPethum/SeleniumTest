@@ -8,23 +8,32 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
 
 public class AddToCart {
+    static WebDriver driver;
+    static WebDriverWait wait;
+    @BeforeMethod
+    public void init(){
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        driver.get("https://www.singersl.com/");
+        driver.manage().window().maximize();
+    }
     //Validate adding the product to Cart from 'Products' Page
     @Test
     public static void testcase1() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
 
             WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-search']")));
             searchInput.sendKeys("TCL 43\" Full HD Google TV - TCL43S5400");
@@ -58,14 +67,9 @@ public class AddToCart {
     //Validate adding the product to Cart from 'Wish List' Page
     @Test
     public static void testcase2() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
+
             driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
 
             driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("pethum013@gmail.com");
@@ -109,24 +113,15 @@ public class AddToCart {
     //Validate adding the product to Cart from Search Results Page
     @Test
     public static void testcase3() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            // Navigate to the website
-            driver.get("https://www.singersl.com/");
-            driver.manage().window().maximize();
 
-            // Perform a search
             WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-search']")));
             searchInput.sendKeys("TCL 43\" Full HD Google TV - TCL43S5400");
 
             WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"search-form\"]/div[2]")));
             searchButton.click();
 
-            // Wait for the search results to load
             Thread.sleep(3000);
 
             driver.findElement(By.xpath("//*[@id=\"popularity\"]/div/div/div[4]/div[2]/div[2]/a")).click();
@@ -134,16 +129,19 @@ public class AddToCart {
             WebElement closePopupButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[3]/div[4]/div/div[2]/div/div/a")));
             closePopupButton.click();
 
-
-            // Wait for the cart page to load
             Thread.sleep(3000);
 
-            // Verify the current URL is the cart URL
             String expectedUrl = "https://www.singersl.com/cart";
             String actualUrl = driver.getCurrentUrl();
             Assert.assertEquals(actualUrl, expectedUrl);
 
         } finally {
+            driver.quit();
+        }
+    }
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
         }
     }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/Lahiru/Desktop/selenium2/SingerSL">
+    <parameter name="url" value="https://www.singersl.com/"></parameter>
+    <test name="test_singer">
         <classes>
+            <class name="AddToCart"/>
             <class name="Login"/>
             <class name="Logout"/>
             <class name="Search"/>
             <class name="ShoppingCart"/>
-            <class name="WishList"/>
             <class name="AddToCart"/>
-
+            <class name="WishList"/>
         </classes>
     </test>
 </suite>

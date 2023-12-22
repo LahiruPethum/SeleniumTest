@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -19,13 +20,13 @@ public class WishList {
     WebDriver driver;
     WebElement checkbox;
     WebElement checkbox1;
-
+    @Parameters({"url"})
     @BeforeMethod
-    public void init(){
+    public void init(String url){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
 
-        driver.get("https://www.singersl.com/");
+        driver.get(url);
         driver.manage().window().maximize();
         driver.findElement(By.xpath("//*[@id=\"block-singer-account-menu\"]/ul/li[2]/a")).click();
 

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -18,14 +19,16 @@ import java.util.List;
 public class AddToCart {
     static WebDriver driver;
     static WebDriverWait wait;
+
+    @Parameters({"url"})
     @BeforeMethod
-    public void init(){
+    public void init(String url){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        driver.get("https://www.singersl.com/");
+        driver.get(url);
         driver.manage().window().maximize();
     }
     //Validate adding the product to Cart from 'Products' Page

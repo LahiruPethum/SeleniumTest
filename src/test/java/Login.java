@@ -47,7 +47,7 @@ public class Login {
         driver.findElement(By.xpath("//*[@id=\"login-submit\"]")).click();
         Assert.assertEquals("'.' is used at a wrong position in 'gmail.'.",msg3);
         Thread.sleep(5000);
-        passwordInput2.clear();
+        passwordInput3.clear();
 
         driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("com");
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
@@ -105,4 +105,6 @@ public class Login {
             driver.quit();
         }
     }
+
+
 }
